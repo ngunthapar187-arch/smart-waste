@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f7ef" />
+    <meta
+      name="description"
+      content="Look up common waste items and find out how they are usually sorted."
+    />
+    <title>SortWise — Know where it goes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="SortWise home">
+        <span class="brand-mark" aria-hidden="true">↻</span>
+        <span>sortwise</span>
+      </a>
+      <span class="topbar-note"><span class="live-dot"></span> Easy sorting for everyone</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> LET’S SORT IT OUT</p>
+          <h1 id="hero-title">Where does it<br /><span>belong?</span></h1>
+          <p class="hero-description">
+            Tell us what you want to throw away. Type it or tap the microphone and say it out loud.
+          </p>
+          <label class="bin-label" for="waste-bin">Already picked a bin? Check it (optional)</label>
+          <select class="bin-select" id="waste-bin" name="bin">
+            <option value="">Choose a bin to check</option>
+            <option value="biodegradable">Food and garden</option>
+            <option value="recyclable">Recycling</option>
+            <option value="hazardous">Special care</option>
+            <option value="electronic">Electronics</option>
+          </select>
+          <form class="search-form" id="search-form" role="search">
+            <span class="search-icon" aria-hidden="true"></span>
+            <label class="visually-hidden" for="item-search">Search a waste item</label>
+            <input
+              id="item-search"
+              name="item"
+              type="search"
+              placeholder="Try “banana” or “banana, bottle, battery”"
+              autocomplete="off"
+              aria-describedby="search-hint mixed-sort-hint"
+            />
+            <button class="voice-button" id="voice-button" type="button" aria-label="Speak an item name" title="Speak an item name">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z" />
+                <path d="M19 11a7 7 0 0 1-14 0M12 18v4m-4 0h8" />
+              </svg>
+            </button>
+            <button type="submit">Find my bin <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="search-hint" id="search-hint" role="status">Tap the microphone to speak, or type an item.</p>
+          <p class="mixed-sort-hint" id="mixed-sort-hint">
+            Mixed waste? Separate item names with commas. This preview identifies items; a real sorting bin also needs sensors and moving parts.
+          </p>
+          <div class="quick-searches" aria-label="Try a common item">
+            <span>Try one:</span>
+            <button type="button" data-query="banana peel">banana peel</button>
+            <button type="button" data-query="plastic bottle">plastic bottle</button>
+            <button type="button" data-query="old phone">old phone</button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-leaf leaf-one">✳</div>
+          <div class="art-leaf leaf-two">✳</div>
+          <div class="art-card">
+            <div class="art-card-top"><span>SAY IT · SORT IT · DONE</span><span>✦</span></div>
+            <div class="art-illustration">
+              <div class="sun"></div>
+              <div class="hill hill-back"></div>
+              <div class="hill hill-front"></div>
+              <div class="plant plant-left"><i></i><i></i><b></b></div>
+              <div class="plant plant-right"><i></i><i></i><b></b></div>
+              <div class="recycle-symbol">↻</div>
+            </div>
+            <div class="art-card-bottom"><span>Every little bit helps.</span><span>01 / 04</span></div>
+          </div>
+          <div class="floating-note"><span class="note-check">✓</span><span>You’ve got this!</span></div>
+        </div>
+      </section>
+
+      <section class="smart-bin" aria-labelledby="smart-bin-title">
+        <div class="smart-bin-heading">
+          <p class="eyebrow"><span class="eyebrow-line"></span> SMART BIN CONCEPT</p>
+          <h2 id="smart-bin-title">One big bin.<br /><span>It sorts the waste.</span></h2>
+          <p>
+            Try the webcam demo to identify a few common items and see their suggested compartment.
+          </p>
+          <div class="camera-demo">
+            <div class="camera-controls">
+              <button class="camera-button" id="start-camera" type="button">Start camera</button>
+              <button class="camera-button camera-button-secondary" id="scan-item" type="button" disabled>Scan item</button>
+              <button class="camera-button camera-button-secondary" id="stop-camera" type="button" disabled>Stop</button>
+            </div>
+            <video class="camera-preview" id="camera-preview" playsinline muted hidden></video>
+            <p class="camera-status" id="camera-status" role="status" aria-live="polite">
+              Camera access needs your permission. Use HTTPS or localhost.
+            </p>
+            <p class="camera-note">
+              Recognition runs in this browser; camera video is not uploaded. This demo recognizes only a few common objects and cannot move waste physically.
+            </p>
+          </div>
+        </div>
+        <div class="smart-bin-visual" role="img" aria-label="Concept of one waste bin with a camera sensor over the opening and four sorting compartments inside">
+          <div class="sensor-unit">
+            <span class="sensor-lens" aria-hidden="true"><span></span></span>
+            <span><strong>Camera sensor</strong><small>Identifies the item</small></span>
+            <span class="sensor-status">CONCEPT</span>
+          </div>
+          <div class="sensor-signal" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="smart-bin-body">
+            <div class="bin-inlet"><span>DROP MIXED WASTE HERE</span></div>
+            <div class="sorting-flap"><span aria-hidden="true">↘</span><small>Automatic sorting flap</small></div>
+            <div class="smart-compartments">
+              <div class="smart-compartment organic"><span aria-hidden="true">🌱</span><strong>Food &amp; garden</strong></div>
+              <div class="smart-compartment recycling"><span aria-hidden="true">♻️</span><strong>Recycling</strong></div>
+              <div class="smart-compartment special"><span aria-hidden="true">⚠️</span><strong>Special care</strong></div>
+              <div class="smart-compartment electronics"><span aria-hidden="true">🔌</span><strong>Electronics</strong></div>
+            </div>
+          </div>
+          <p class="hardware-note">This is a visual concept only. A real automatic sorter also needs a controller and motorized flaps.</p>
+        </div>
+      </section>
+
+      <section class="result-section" id="result-section" aria-live="polite" hidden>
+        <div class="result-heading">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR SORTING RESULT</p>
+          <button class="clear-result" id="clear-result" type="button">Clear <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="result-card" id="result-card"></div>
+      </section>
+
+      <section class="categories" aria-labelledby="categories-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> MEET THE BINS</p>
+            <h2 id="categories-title">Pick the <span>right bin.</span></h2>
+          </div>
+          <p class="section-intro">Look at the pictures and examples to find where your item belongs.</p>
+        </div>
+        <div class="category-grid">
+          <article class="category-card biodegradable">
+            <div class="category-card-top"><span class="category-number">01</span></div>
+            <div class="bin-illustration" aria-hidden="true"><span class="bin-lid"></span><span class="bin-body"><span class="category-icon">🌱</span></span></div>
+            <h3>Food &amp; garden</h3>
+            <p>Banana peels, food scraps and leaves.</p>
+            <span class="category-example">BIODEGRADABLE · COMPOST</span>
+          </article>
+          <article class="category-card recyclable">
+            <div class="category-card-top"><span class="category-number">02</span></div>
+            <div class="bin-illustration" aria-hidden="true"><span class="bin-lid"></span><span class="bin-body"><span class="category-icon">♻️</span></span></div>
+            <h3>Recycling</h3>
+            <p>Clean paper, cans, glass and some bottles.</p>
+            <span class="category-example">RINSE BOTTLES &amp; CANS</span>
+          </article>
+          <article class="category-card hazardous">
+            <div class="category-card-top"><span class="category-number">03</span></div>
+            <div class="bin-illustration" aria-hidden="true"><span class="bin-lid"></span><span class="bin-body"><span class="category-icon">⚠️</span></span></div>
+            <h3>Special care</h3>
+            <p>Batteries and paint need safe handling.</p>
+            <span class="category-example">HAZARDOUS · ASK A GROWN-UP</span>
+          </article>
+          <article class="category-card electronic">
+            <div class="category-card-top"><span class="category-number">04</span></div>
+            <div class="bin-illustration" aria-hidden="true"><span class="bin-lid"></span><span class="bin-body"><span class="category-icon">🔌</span></span></div>
+            <h3>Electronics</h3>
+            <p>Old phones, chargers and other devices.</p>
+            <span class="category-example">E-WASTE · SPECIAL DROP-OFF</span>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span class="footer-brand"><span class="brand-mark" aria-hidden="true">↻</span> sortwise</span>
+      <p>Not sure? Ask a grown-up. Local bin rules can be different.</p>
+      <span class="footer-note">Made for a greener everyday <span aria-hidden="true">✳</span></span>
+    </footer>
+  </body>
+</html>

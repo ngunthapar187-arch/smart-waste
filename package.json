@@ -1,0 +1,13 @@
+{
+  "name": "sortwise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A browser-based waste sorting guide",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
